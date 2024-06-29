@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="text-4xl font-bold mb-4 underline">Calorie Counter</h1>
+    <a href="{% url 'food_list' %}" class="text-blue-500 hover:text-green-500 underline">View Food List</a>
+</div>
+{% endblock %}

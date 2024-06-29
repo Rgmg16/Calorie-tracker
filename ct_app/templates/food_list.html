@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Food List{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <h2 class="text-2xl font-bold mb-2 underline">Food List</h2>
+    <form method="POST" class="mb-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="bg-blue-500 text-white hover:bg-green-500 py-2 px-4 rounded">Add Food</button>
+    </form>
+    <ul>
+        {% for food in foods %}
+        <li class="mb-2">
+            {{ food.name }} - {{ food.calories }} calories
+            <form method="POST" action="{% url 'delete_food' food.id %}" class="inline-block">
+                {% csrf_token %}
+                <button type="submit" class="bg-red-500 hover:bg-red-400 text-white py-1 px-2 rounded">Remove</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <p class="mt-4">Total Calories: {{ total_calories }}</p>
+    <form method="POST" action="{% url 'reset_calories' %}">
+        {% csrf_token %}
+        <button type="submit" class="bg-yellow-500 hover:bg-yellow-400 text-white py-2 px-4 rounded">Reset Calories</button>
+    </form>
+</div>
+<a href="{% url 'home' %}" class="text-blue-500 hover:text-green-500 underline">Go Back Home</a>
+{% endblock %}
